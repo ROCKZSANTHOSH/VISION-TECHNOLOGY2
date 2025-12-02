@@ -8,14 +8,13 @@ datasource db {
 }
 
 model Course {
-  id          Int      @id @default(autoincrement())
-  title       String
-  category    String
-  description String
-  imageUrl    String?
-  price       Int?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            Int            @id @default(autoincrement())
+  name          String
+  description   String?
+  createdAt     DateTime       @default(now())
+  
+  // ADD THIS LINE ↓↓↓
+  demoBookings  DemoBooking[]
 }
 
 model ContactMessage {
@@ -30,10 +29,9 @@ model ContactMessage {
 model DemoBooking {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String
-  phone     String?
+  phone     String
   courseId  Int?
-  preferred String?
   createdAt DateTime @default(now())
+
   course    Course?  @relation(fields: [courseId], references: [id])
 }
